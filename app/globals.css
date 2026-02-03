@@ -39,6 +39,12 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.leaflet-card:active {
+  opacity: 0.8;
 }
 
 .leaflet-image {
@@ -58,5 +64,9 @@ html, body {
   .leaflet-card {
     max-height: none;
     border-radius: 8px;
+  }
+
+  .leaflet-card:hover {
+    transform: scale(1.01);
   }
 }
