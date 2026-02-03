@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ray Park Café Website
+
+An elegant, café-themed website showcasing Ray Park Café's leaflet designs with a warm, editorial aesthetic.
 
 ## Getting Started
 
-First, run the development server:
+1. **Run the development server:**
+   ```bash
+   cd rayparkcafe
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) in your browser
+
+2. **Add your leaflet images:**
+   - Place your leaflet images in the `public/` folder
+   - Name them `leaflet-1.jpg` and `leaflet-2.jpg` (or update the paths in `app/page.tsx`)
+   - Recommended size: 1200x1600px or similar portrait orientation
+   - Once added, uncomment the `<Image>` components in `app/page.tsx` (around lines 36-45 and 66-74)
+
+3. **Customize:**
+   - Edit text in `app/page.tsx` (café name, description, etc.)
+   - Adjust colors in `app/globals.css` (CSS variables at lines 5-9)
+   - Add more leaflet sections by copying the existing leaflet containers
+
+## Building for Production
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Future: Backend for Hygiene Documents
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The Next.js framework is already set up to handle backend routes when you're ready to add the compliance documentation system. This will be added in the `/app/api` directory.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Design Features
 
-## Learn More
+- **Typography**: Playfair Display (serif) for elegant headers, Lato for body text
+- **Color Palette**: Warm cream (#FAF7F2), espresso brown (#2D2520), terracotta accent (#C8856A)
+- **Aesthetic**: Editorial café style - sophisticated but approachable
+- **Animations**: Smooth fade-in effects, hover interactions on leaflet cards
+- **Effects**: Subtle paper texture overlay, soft shadows, elegant transitions
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with Next.js 15, React, TypeScript, and Tailwind CSS.
