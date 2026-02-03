@@ -14,7 +14,7 @@
 
 html, body {
   background: var(--forest);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 /* Container - responsive layout */
@@ -23,19 +23,19 @@ html, body {
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  padding: 8px;
-  gap: 8px;
+  padding: 4px;
+  gap: 4px;
 }
 
 /* Cards */
 .leaflet-card {
   flex: 1;
   min-height: 0;
+  max-height: 49%;
   background: white;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,11 +47,6 @@ html, body {
   object-fit: contain;
 }
 
-/* Press effect on mobile */
-.leaflet-card:active {
-  opacity: 0.9;
-}
-
 /* DESKTOP: Side by side at 768px and up */
 @media (min-width: 768px) {
   .leaflet-container {
@@ -61,11 +56,7 @@ html, body {
   }
 
   .leaflet-card {
+    max-height: none;
     border-radius: 8px;
-    transition: transform 0.3s ease;
-  }
-
-  .leaflet-card:hover {
-    transform: scale(1.02);
   }
 }
