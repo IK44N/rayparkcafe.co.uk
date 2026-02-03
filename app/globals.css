@@ -14,35 +14,26 @@
   box-sizing: border-box;
 }
 
-body {
-  background: var(--forest);
+html, body {
+  height: 100%;
   overflow: hidden;
+  background: var(--forest);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .leaflet-card {
   background: white;
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Desktop hover effect only */
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .leaflet-card {
     border-radius: 8px;
   }
-
-  .leaflet-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-}
-
-html {
-  scroll-behavior: smooth;
 }
