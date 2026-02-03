@@ -108,90 +108,109 @@ export default function TemperaturePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      {/* Ambient background effects */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,0.03),transparent_50%)] pointer-events-none"></div>
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(59,130,246,0.02),transparent_50%)] pointer-events-none"></div>
+
+      {/* Header */}
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-gray-100">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+          <div className="flex justify-between items-center h-[72px]">
             <div>
-              <Link href="/admin/dashboard" className="text-green-600 hover:text-green-700 text-sm mb-2 block">
-                ← Back to Dashboard
+              <Link
+                href="/admin/dashboard"
+                className="inline-flex items-center gap-2 text-[14px] text-emerald-600 hover:text-emerald-700 font-medium mb-1.5 transition-colors duration-200"
+              >
+                <span>←</span> Dashboard
               </Link>
-              <h1 className="text-2xl font-bold text-gray-900">Temperature Checks</h1>
-              <p className="text-sm text-gray-600">Date: {new Date(todayDate).toLocaleDateString('en-GB')}</p>
+              <h1 className="text-[24px] font-semibold text-gray-900 tracking-tight">Temperature Checks</h1>
+              <p className="text-[13px] text-gray-500 font-medium mt-0.5">
+                {new Date(todayDate).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+              </p>
             </div>
             <button
               onClick={handleAutoFill}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors font-medium"
+              className="h-[44px] px-6 bg-gradient-to-b from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 active:scale-[0.98] text-white text-[14px] font-semibold rounded-[12px] transition-all duration-200 shadow-lg shadow-emerald-500/30 flex items-center gap-2"
             >
-              🤖 Auto-Fill Today
+              <span>🤖</span> Auto-Fill Today
             </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+      {/* Main Content */}
+      <main className="max-w-[1400px] mx-auto px-6 lg:px-8 py-8">
+        <div className="bg-white/80 backdrop-blur-xl rounded-[20px] shadow-xl shadow-black/5 border border-gray-100 overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <table className="min-w-full">
+              <thead>
+                <tr className="bg-gray-50/80 border-b border-gray-100">
+                  <th className="px-6 py-4 text-left text-[12px] font-semibold text-gray-700 uppercase tracking-wide">
                     Unit
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-[12px] font-semibold text-gray-700 uppercase tracking-wide">
                     Max Temp
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-center text-[12px] font-semibold text-gray-700 uppercase tracking-wide">
                     AM Reading
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-center text-[12px] font-semibold text-gray-700 uppercase tracking-wide">
                     PM Reading
                   </th>
-                  <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-center text-[12px] font-semibold text-gray-700 uppercase tracking-wide">
                     Status
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {units.map((unit) => {
+              <tbody>
+                {units.map((unit, index) => {
                   const amValue = getTodayReading(unit.name, 'am');
                   const pmValue = getTodayReading(unit.name, 'pm');
+                  const isLastRow = index === units.length - 1;
                   return (
-                    <tr key={unit.name} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <tr
+                      key={unit.name}
+                      className={`hover:bg-gray-50/50 transition-colors duration-150 ${!isLastRow ? 'border-b border-gray-100' : ''}`}
+                    >
+                      <td className="px-6 py-4 text-[14px] font-medium text-gray-900">
                         {unit.name}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {unit.max}°C
+                      <td className="px-6 py-4 text-[14px] text-gray-600 font-medium">
+                        {unit.max > 0 ? `+${unit.max}` : unit.max}°C
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <input
-                          type="number"
-                          step="0.1"
-                          value={amValue}
-                          onChange={(e) => handleInputChange(unit.name, 'am', e.target.value)}
-                          className="w-24 px-3 py-2 border border-gray-300 rounded-md text-center focus:ring-2 focus:ring-blue-500"
-                          placeholder="AM"
-                        />
-                        <span className="ml-2">{getStatus(amValue, unit.max, unit.type)}</span>
+                      <td className="px-6 py-4 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={amValue}
+                            onChange={(e) => handleInputChange(unit.name, 'am', e.target.value)}
+                            className="w-[90px] h-[40px] px-3 bg-gray-50/80 border border-gray-200 rounded-[10px] text-[14px] text-gray-900 text-center placeholder-gray-400 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all"
+                            placeholder="—"
+                          />
+                          <span className="text-[18px] w-[24px]">{getStatus(amValue, unit.max, unit.type)}</span>
+                        </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
-                        <input
-                          type="number"
-                          step="0.1"
-                          value={pmValue}
-                          onChange={(e) => handleInputChange(unit.name, 'pm', e.target.value)}
-                          className="w-24 px-3 py-2 border border-gray-300 rounded-md text-center focus:ring-2 focus:ring-blue-500"
-                          placeholder="PM"
-                        />
-                        <span className="ml-2">{getStatus(pmValue, unit.max, unit.type)}</span>
+                      <td className="px-6 py-4 text-center">
+                        <div className="flex items-center justify-center gap-3">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={pmValue}
+                            onChange={(e) => handleInputChange(unit.name, 'pm', e.target.value)}
+                            className="w-[90px] h-[40px] px-3 bg-gray-50/80 border border-gray-200 rounded-[10px] text-[14px] text-gray-900 text-center placeholder-gray-400 focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 outline-none transition-all"
+                            placeholder="—"
+                          />
+                          <span className="text-[18px] w-[24px]">{getStatus(pmValue, unit.max, unit.type)}</span>
+                        </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <td className="px-6 py-4 text-center">
                         {amValue && pmValue &&
                           (getStatus(amValue, unit.max, unit.type) === '✅' &&
                            getStatus(pmValue, unit.max, unit.type) === '✅'
-                            ? <span className="text-green-600 font-bold">PASS</span>
-                            : <span className="text-red-600 font-bold">FAIL</span>
+                            ? <span className="inline-flex items-center px-3 py-1.5 rounded-[8px] bg-emerald-50 text-[13px] text-emerald-700 font-semibold">PASS</span>
+                            : <span className="inline-flex items-center px-3 py-1.5 rounded-[8px] bg-red-50 text-[13px] text-red-700 font-semibold">FAIL</span>
                           )
                         }
                       </td>
@@ -203,10 +222,11 @@ export default function TemperaturePage() {
           </div>
         </div>
 
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <p className="text-sm text-blue-800">
-            <strong>📝 Note:</strong> Click "Auto-Fill Today" to automatically generate realistic temperature readings for demonstration purposes.
-            All values can be manually edited. Fridges max 8°C, Freezers max -18°C.
+        {/* Info Card */}
+        <div className="mt-6 bg-blue-50/80 backdrop-blur-sm border border-blue-100 rounded-[16px] p-5">
+          <p className="text-[13px] text-blue-800 leading-relaxed">
+            <strong className="font-semibold">📝 Note:</strong> Click "Auto-Fill Today" to automatically generate realistic temperature readings.
+            All values can be manually edited. Fridges must stay at or below +8°C, Freezers at or below -18°C.
           </p>
         </div>
       </main>
