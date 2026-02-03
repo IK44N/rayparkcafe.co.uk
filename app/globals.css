@@ -68,116 +68,131 @@ html, body {
 
 /* ===== ADMIN PORTAL STYLES ===== */
 
-@layer utilities {
-  /* Glass morphism */
-  .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-2xl;
-  }
+/* Glass morphism */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
 
-  .glass-header {
-    @apply bg-white/70 backdrop-blur-xl;
-  }
+.glass-header {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
 
-  /* Modern card with hover effect */
-  .modern-card {
-    @apply relative bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden;
-    @apply hover:shadow-2xl hover:-translate-y-1 hover:border-emerald-200;
-    @apply transition-all duration-500 cursor-pointer;
-    animation: fadeInUp 0.6s ease-out forwards;
+/* Modern card with hover effect */
+.modern-card {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.modern-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-4px);
+  border-color: #a7f3d0;
+}
+
+/* Modern input */
+.modern-input {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-input:focus {
+  transform: scale(1.02);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
     opacity: 0;
   }
-
-  /* Modern input */
-  .modern-input {
-    @apply transition-all duration-300;
+  to {
+    opacity: 1;
   }
+}
 
-  .modern-input:focus {
-    @apply scale-[1.02];
-  }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
 
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
   }
+  25% {
+    transform: translate(20px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(50px, 50px) scale(1.05);
+  }
+}
 
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
 
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
-  }
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
 
-  @keyframes blob {
-    0%, 100% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(20px, -50px) scale(1.1);
-    }
-    50% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    75% {
-      transform: translate(50px, 50px) scale(1.05);
-    }
-  }
+.animate-blob {
+  animation: blob 20s infinite;
+}
 
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out;
-  }
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
 
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out;
-  }
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
 
-  .animate-shake {
-    animation: shake 0.5s ease-in-out;
-  }
-
-  .animate-blob {
-    animation: blob 20s infinite;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
-
-  /* Background pattern */
-  .bg-grid-pattern {
-    background-image:
-      linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
+/* Background pattern */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
