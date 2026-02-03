@@ -17,8 +17,8 @@ html, body {
   overflow-x: hidden;
 }
 
-/* MOBILE: Stack vertically, both fit on screen */
-.mobile-view {
+/* Container - responsive layout */
+.leaflet-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -27,7 +27,8 @@ html, body {
   gap: 8px;
 }
 
-.mobile-view .leaflet-card {
+/* Cards */
+.leaflet-card {
   flex: 1;
   min-height: 0;
   background: white;
@@ -40,31 +41,31 @@ html, body {
   justify-content: center;
 }
 
-.mobile-view .leaflet-image {
+.leaflet-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
+/* Press effect on mobile */
+.leaflet-card:active {
+  opacity: 0.9;
+}
+
 /* DESKTOP: Side by side at 768px and up */
 @media (min-width: 768px) {
-  .desktop-view {
-    flex-direction: row !important;
+  .leaflet-container {
+    flex-direction: row;
     padding: 16px;
     gap: 16px;
   }
 
-  .desktop-view .leaflet-card {
+  .leaflet-card {
     border-radius: 8px;
     transition: transform 0.3s ease;
   }
 
-  .desktop-view .leaflet-card:hover {
+  .leaflet-card:hover {
     transform: scale(1.02);
   }
-}
-
-/* Press effect on mobile */
-.leaflet-card:active {
-  opacity: 0.9;
 }

@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <main className="w-full bg-forest">
         {/* Container */}
-        <div className="mobile-view md:desktop-view">
+        <div className="leaflet-container">
           {/* Leaflet 1 */}
           <div
             className="leaflet-card"
