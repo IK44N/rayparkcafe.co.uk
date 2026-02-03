@@ -32,10 +32,7 @@ html, body {
   flex: 1;
   min-height: 0;
   max-height: 49%;
-  background: white;
-  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +41,7 @@ html, body {
 }
 
 .leaflet-card:active {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .leaflet-image {
@@ -57,13 +54,12 @@ html, body {
 @media (min-width: 768px) {
   .leaflet-container {
     flex-direction: row;
-    padding: 16px;
-    gap: 16px;
+    padding: 8px;
+    gap: 8px;
   }
 
   .leaflet-card {
     max-height: none;
-    border-radius: 8px;
   }
 
   .leaflet-card:hover {
